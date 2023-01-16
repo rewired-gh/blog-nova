@@ -29,6 +29,11 @@ katex = true
 [params.social]
 rss = "index.xml" # Add this to show RSS button in social.
 
+[params.sections_left]
+"https://www.hopp.top" = "Landing Page"
+"/index.xml" = "RSS"
+"/about" = "About"
+
 [taxonomies]
 tag = "tags"
 
