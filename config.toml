@@ -1,10 +1,12 @@
 baseURL = 'https://blog.hopp.top'
-languageCode = 'zh-cn'
+languageCode = 'zh-Hant-CN'
 title = 'Blog Rewired'
 theme = 'kiss'
 copyright = 'rewired (c) 2023'
 paginate = 7
 enableRobotsTXT = true
+hasCJKLanguage = true
+enableEmoji = true
 
 [params.rss]
 includeContent = true      # Includes whole content in rss
