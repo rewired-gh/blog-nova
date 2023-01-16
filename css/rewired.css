@@ -1,0 +1,7 @@
+.content ol:not(:last-child),
+.content p:not(:last-child),
+.content pre:not(:last-child),
+.content table:not(:last-child),
+.content ul:not(:last-child) {
+    margin-bottom: 0.8em;
+}

@@ -1,0 +1,36 @@
+baseURL = 'https://blog.hopp.top'
+languageCode = 'zh-cn'
+title = 'Blog Rewired'
+theme = 'kiss'
+copyright = 'rewired (c) 2023'
+paginate = 7
+enableRobotsTXT = true
+
+[params.rss]
+includeContent = true      # Includes whole content in rss
+authorName = 'Rewired'     # Author full name
+authorEmail = 'n@hopp.top' # Author email
+
+[params.assets]
+customCSS = ['css/rewired.css']
+
+[params.info]
+homeTitle = 'Blog'     # Title for home page
+poweredby = false      # Adds powered by hugo and kiss below Copyright
+related = false        # Includes related articles at the bottom of the article
+codeCopy = false       # Add copy button above code blocks
+taxonomiesCount = true # Add taxonomies count
+
+[params.features]
+disqusOnDemand = false
+mathjax = false
+katex = true
+
+[params.social]
+rss = "index.xml" # Add this to show RSS button in social.
+
+[taxonomies]
+tag = "tags"
+
+[markup.goldmark.renderer]
+unsafe = true
