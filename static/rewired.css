@@ -1,0 +1,35 @@
+.content ol:not(:last-child),
+.content p:not(:last-child),
+.content pre:not(:last-child),
+.content table:not(:last-child),
+.content ul:not(:last-child) {
+    margin-bottom: 0.9em;
+}
+
+body {
+    font-family:
+        -apple-system,
+        system-ui,
+        "Segoe UI",
+        Roboto,
+        Ubuntu,
+        Cantarell,
+        "Noto Sans",
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        "PingFang SC",
+        "Hiragino Sans GB",
+        "Microsoft YaHei",
+        "游ゴシック",
+        YuGothic,
+        "ヒラギノ角ゴ Pro",
+        "Hiragino Kaku Gothic Pro",
+        "メイリオ",
+        Meiryo,
+        Arial,
+        sans-serif !important;
+}
+
+section>div.container.has-text-centered>p {
+    color: #F6AAB9;
+}

@@ -12,14 +12,14 @@ authorName = 'Rewired'     # Author full name
 authorEmail = 'n@hopp.top' # Author email
 
 [params.assets]
-customCSS = ['css/rewired.css']
+customCSS = ['rewired.css']
 
 [params.info]
-homeTitle = 'Blog'     # Title for home page
-poweredby = false      # Adds powered by hugo and kiss below Copyright
-related = false        # Includes related articles at the bottom of the article
-codeCopy = false       # Add copy button above code blocks
-taxonomiesCount = true # Add taxonomies count
+homeTitle = 'Blog Rewired 🍀' # Title for home page
+poweredby = false            # Adds powered by hugo and kiss below Copyright
+related = false              # Includes related articles at the bottom of the article
+codeCopy = false             # Add copy button above code blocks
+taxonomiesCount = true       # Add taxonomies count
 
 [params.features]
 disqusOnDemand = false
