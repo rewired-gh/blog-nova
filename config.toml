@@ -1,4 +1,4 @@
-baseURL = 'https://blog.hopp.top'
+baseURL = 'https://blog.rewired.moe'
 languageCode = 'zh-Hant-CN'
 title = 'Blog Rewired'
 theme = 'kiss'
@@ -32,7 +32,7 @@ katex = true
 rss = "index.xml" # Add this to show RSS button in social.
 
 [params.sections_left]
-"https://www.hopp.top" = "Landing Page"
+"https://rewired.moe" = "Landing Page"
 "/index.xml" = "RSS"
 "/about" = "About"
 
