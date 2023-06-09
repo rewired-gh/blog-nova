@@ -4,7 +4,7 @@ backend:
 media_folder: "static/assets"
 public_folder: "/assets"
 site_url: https://blog.rewired.moe
-logo_url: https://your-site.com/favicon.svg
+logo_url: https://blog.rewired.moe/favicon.svg
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
