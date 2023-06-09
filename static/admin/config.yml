@@ -1,7 +1,6 @@
 backend:
   name: git-gateway
   branch: main
-publish_mode: editorial_workflow
 media_folder: "static/assets"
 public_folder: "/assets"
 site_url: https://blog.rewired.moe
