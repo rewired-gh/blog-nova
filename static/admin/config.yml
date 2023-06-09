@@ -4,6 +4,8 @@ backend:
 publish_mode: editorial_workflow
 media_folder: "static/assets"
 public_folder: "/assets"
+site_url: https://blog.rewired.moe
+logo_url: https://your-site.com/favicon.svg
 collections:
   - name: "blog" # Used in routes, e.g., /admin/collections/blog
     label: "Blog" # Used in the UI
