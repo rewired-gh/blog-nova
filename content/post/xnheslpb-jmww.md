@@ -32,7 +32,7 @@ menu = "main"
 - n：小鸟鸟
 - m：小绵绵
 
-总结：需要死记硬背的有 t、u、i、o、p、g、h、j、k、l、v。其中 u、i、g、h、j 非常常用，无需额外背诵。因此，需要背诵的有 t、o、k、l、v。
+总结：需要死记硬背的有 t、u、i、o、p、g、h、j、k、l、x、v。其中 u、i、g、h、j 非常常用，无需额外背诵。因此，需要背诵的有 t、o、k、l、x（对于 ua）、v。
 
 推荐的双拼练习网站：<https://blog.simplenaive.cn/shuangpin>
 
