@@ -1,7 +1,7 @@
 +++
 author = 'Rewired'
 date = '2023-06-19'
-title = '实用双拼键位记法'
+title = '实用小鹤双拼键位记法'
 tags = [
   '双拼'
 ]
@@ -33,3 +33,5 @@ menu = "main"
 - m：小绵绵
 
 总结：需要死记硬背的有 t、u、i、o、p、g、h、j、k、l、v。其中 u、i、g、h、j 非常常用，无需额外背诵。因此，需要背诵的有 t、o、k、l、v。
+
+推荐的双拼练习网站：<https://blog.simplenaive.cn/shuangpin>
