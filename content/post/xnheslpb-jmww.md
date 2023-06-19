@@ -35,3 +35,5 @@ menu = "main"
 总结：需要死记硬背的有 t、u、i、o、p、g、h、j、k、l、v。其中 u、i、g、h、j 非常常用，无需额外背诵。因此，需要背诵的有 t、o、k、l、v。
 
 推荐的双拼练习网站：<https://blog.simplenaive.cn/shuangpin>
+
+番外：「袄」可以通过「ac」输入，展开即「aao」。不同的输入法不一定是一样的，请结合实际尝试。
