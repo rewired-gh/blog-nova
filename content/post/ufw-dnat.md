@@ -12,7 +12,7 @@ menu = "main"
 
 某个妙妙服务需要将一些端口双向转发到另一个端口，一般来说可以使用 iptables 来完成路由配置，比如：
 
-```bash
+```
 # IPv4
 iptables -t nat -A PREROUTING -i eth0 -p udp --dport 20000:50000 -j DNAT --to-destination :443
 # IPv6
@@ -29,7 +29,7 @@ ip6tables -t nat -A PREROUTING -i eth0 -p udp --dport 20000:50000 -j DNAT --to-d
 
 在 `/etc/ufw/sysctl.conf` 文件中，将端口转发相关的配置项目去掉注释即可。这些项目通常列于这样一个说明的下方：
 
-```bash
+```
 # Uncomment this to allow this host to route packets between interfaces
 ```
 
@@ -37,7 +37,7 @@ ip6tables -t nat -A PREROUTING -i eth0 -p udp --dport 20000:50000 -j DNAT --to-d
 
 执行以下命令，这将会添加一个名为 `99-forward.conf` 的 sysctl 配置文件：
 
-```bash
+```
 sudo tee /etc/sysctl.d/99-forward.conf >/dev/null <<EOT
 net.ipv4.ip_forward = 1
 net.ipv6.conf.default.forwarding = 1
