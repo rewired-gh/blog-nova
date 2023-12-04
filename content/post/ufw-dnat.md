@@ -57,7 +57,6 @@ EOT
 :PREROUTING ACCEPT [0:0]
 -A PREROUTING -i eth0 -p udp --dport 20000:50000 -j DNAT --to-destination :443
 COMMIT
-EOT
 ```
 
 参数说明：
