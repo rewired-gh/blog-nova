@@ -1,5 +1,5 @@
 baseURL = 'https://blog.rewired.moe'
-languageCode = 'zh-Hant-CN'
+languageCode = 'zh-cn'
 title = 'Blog Rewired'
 theme = 'kiss'
 copyright = 'rewired (c) 2023'
@@ -9,9 +9,9 @@ hasCJKLanguage = true
 enableEmoji = true
 
 [params.rss]
-includeContent = true      # Includes whole content in rss
-authorName = 'Rewired'     # Author full name
-authorEmail = 'n@hopp.top' # Author email
+includeContent = true         # Includes whole content in rss
+authorName = 'Rewired'        # Author full name
+authorEmail = 'n@rewired.moe' # Author email
 
 [params.assets]
 customCSS = ['rewired.css']
@@ -22,6 +22,7 @@ poweredby = false            # Adds powered by hugo and kiss below Copyright
 related = false              # Includes related articles at the bottom of the article
 codeCopy = false             # Add copy button above code blocks
 taxonomiesCount = true       # Add taxonomies count
+enableSocial = true          # Adds OpenGraph and Twitter cards
 
 [params.features]
 disqusOnDemand = false
@@ -41,3 +42,6 @@ tag = "tags"
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[blackfriday]
+hrefTargetBlank = true
