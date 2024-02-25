@@ -93,7 +93,7 @@ false
 false
 ```
 
-但是，令人气愤的是，如果通过往 `window` 或 `globalThis` 添加属性来声明全局变量，则可以被 `delete` 删除；例如：
+但是，如果通过往 `window` 或 `globalThis` 添加属性来声明全局变量，则可以被 `delete` 删除；例如：
 
 ```
 > globalThis.obj = 0
@@ -103,6 +103,23 @@ false
 > delete obj
 true
 ```
+
+那么，如果我们用 `var` 声明一个 `window` 或 `globalThis` 中已经存在的全局变量呢？如果按照之前发现的规律，这个全局变量应该是不能被删除的。但是，现实真的如此吗？
+
+```
+> globalThis.fetch
+[Function: fetch]
+> var fetch = 1
+undefined
+> globalThis.fetch
+1
+> delete fetch
+true
+> globalThis.fetch
+undefined
+```
+
+无语凝噎。
 
 ## 结语
 
