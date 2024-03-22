@@ -125,8 +125,6 @@ undefined
 
 在 ES5 以及更早的版本中，`undefined` 是一个变量，可以被更改。因此，如果开发者确实需要用到 `undefined` 的时候，会采用 [`void 0`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/void) 这个写法。此外，由于 `void 0` 相比 `undefined` 占用更少的字符，所以很多代码最小化工具会将 `undefined` 最小化为 `void 0`。
 
-
-
 ## 结语
 
 不愧是 JavaScript，到处都是狗皮药膏和不一致性的表现，新特性为了兼容性只能为以前的不良设计擦屁股。
