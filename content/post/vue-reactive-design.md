@@ -13,7 +13,9 @@ menu = "main"
 
 大厂面试很喜欢考「Vue 原理」云云的东西，时不时还会问「是否阅读过 Vue 源码之类的问题」。因此，网上已经有很多类似「Vue 源码导读」之类的资源，然而往往只是给源码片段分别做一点点解说，而并没有从系统层面去分析设计动机和逻辑。本文主要是笔者对于 Vue 3 响应式原理的一些拙见，希望相比于所谓的「Vue 源码导读」能提供更多的见解。
 
-## 基础响应式的第一印象
+## 基础响应式
+
+### 第一印象
 
 不妨假设有如下的需求：
 
@@ -48,6 +50,87 @@ effect(() => {v_successor = obj.v + 1})
 3. （对 `obj.v` 赋值）发布者察觉到有人设置自己，于是设置完后，按照名单逐个唤醒监听自己的人。
 4. 订阅者被唤醒了，告诉所有人自己是目前唯一的执行者。
 5. 发布者又察觉到有人读取自己，结果发现这个人是熟人，已经在监听自己的人的名单上了。
+
+### 实现精简版的 Vue
+
+```
+let activeWatch: (() => void) | null = null
+
+const reactive = <T extends Object>(obj: T): T => {
+  const watcherMap: Map<String | Symbol, Set<() => void>> = new Map()
+  const handler: ProxyHandler<T> = {
+    get(target, property, receiver) {
+      let watchers = watcherMap.get(property)
+      // 当有观察者观察且该观察者尚未被注册
+      if (activeWatch && !watchers?.has(activeWatch)) {
+        if (!watchers) {
+          watchers = new Set()
+          watcherMap.set(property, watchers)
+        }
+        // 注册正在观察自己的观察者
+        watchers.add(activeWatch)
+      }
+      return Reflect.get(target, property, receiver)
+    },
+    set(target, property, value, receiver) {
+      // 先设置
+      const returnVal = Reflect.set(target, property, value, receiver)
+      let watchers = watcherMap.get(property)
+      if (watchers) {
+        watchers.forEach((handler) => {
+          // 调用观察者
+          handler()
+        })
+      }
+      return returnVal
+    }
+  }
+  return new Proxy(obj, handler);
+}
+
+const effect = (fn: () => void) => {
+  const wrappedFn = () => {
+    // 告知潜在的响应式对象目前的观察者是谁
+    activeWatch = wrappedFn
+    // 调用传入函数，函数中可能会访问响应式对象
+    fn()
+    // 观察完成
+    activeWatch = null
+  }
+  // 立刻执行一遍以在响应式对象中注册自己
+  wrappedFn()
+  return wrappedFn
+}
+
+const computed = <T extends unknown>(getter: () => T) => {
+  let dirty = false
+  let value: T
+  effect(() => {
+    // 仅标记数据脏而不立刻重新计算
+    dirty = true
+  })
+  return {
+    get value() {
+      if (dirty) {
+        // 当数据脏时才重新计算
+        value = getter()
+        dirty = false
+      }
+      return value
+    }
+  }
+}
+
+// 例子
+const objA = reactive({ a: 1 })
+const objB = reactive({ b: 1 })
+// follower 随 obj.a 的变化而变化
+const follower = computed(() => objA.a + objB.b)
+// 更改了响应式对象的属性
+objA.a = 2, objB.b = 2
+// 期望输出：4
+console.log(follower.value)
+```
 
 ## 更多内容
 
