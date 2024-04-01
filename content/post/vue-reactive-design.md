@@ -51,12 +51,12 @@ effect(() => {v_successor = obj.v + 1})
 4. 订阅者被唤醒了，告诉所有人自己是目前唯一的执行者。
 5. 发布者又察觉到有人读取自己，结果发现这个人是熟人，已经在监听自己的人的名单上了。
 
-### 实现精简版的 Vue
+### 实现精简版的 Vue 响应式
 
 ```
 let activeWatch: (() => void) | null = null
 
-const reactive = <T extends Object>(obj: T): T => {
+const reactive = <T extends Object>(obj: T) => {
   const watcherMap: Map<String | Symbol, Set<() => void>> = new Map()
   const handler: ProxyHandler<T> = {
     get(target, property, receiver) {
@@ -88,32 +88,40 @@ const reactive = <T extends Object>(obj: T): T => {
   return new Proxy(obj, handler);
 }
 
-const effect = (fn: () => void) => {
-  const wrappedFn = () => {
-    // 告知潜在的响应式对象目前的观察者是谁
-    activeWatch = wrappedFn
-    // 调用传入函数，函数中可能会访问响应式对象
-    fn()
-    // 观察完成
-    activeWatch = null
+const effect = <T extends unknown> (fn: () => T, callback?: () => void, lazy: boolean = false) => {
+  let wrappedCallback: () => void
+  const getWrapped = <U extends unknown> (inner: () => U) => {
+    return () => {
+      // 告知潜在的响应式对象目前的观察者的回调函数
+      activeWatch = wrappedCallback
+      // 调用传入函数
+      const returnVal = inner()
+      // 观察完成
+      activeWatch = null
+      return returnVal
+    }
   }
-  // 立刻执行一遍以在响应式对象中注册自己
-  wrappedFn()
+  const wrappedFn = getWrapped(fn)
+  wrappedCallback = callback ? getWrapped(callback) : wrappedFn
+  if (!lazy) {
+    // 立刻执行一遍以在响应式对象中注册自己
+    wrappedFn()
+  }
   return wrappedFn
 }
 
 const computed = <T extends unknown>(getter: () => T) => {
-  let dirty = false
+  let dirty = true
   let value: T
-  effect(() => {
+  const runner =  effect(getter, () => {
     // 仅标记数据脏而不立刻重新计算
     dirty = true
-  })
+  }, true)
   return {
     get value() {
       if (dirty) {
-        // 当数据脏时才重新计算
-        value = getter()
+        // 当数据脏时才在读取时重新计算
+        value = runner()
         dirty = false
       }
       return value
@@ -124,11 +132,18 @@ const computed = <T extends unknown>(getter: () => T) => {
 // 例子
 const objA = reactive({ a: 1 })
 const objB = reactive({ b: 1 })
+
 // follower 随 obj.a 的变化而变化
 const follower = computed(() => objA.a + objB.b)
+
 // 更改了响应式对象的属性
 objA.a = 2, objB.b = 2
 // 期望输出：4
+console.log(follower.value)
+
+// 更改了响应式对象的属性
+objA.a = 3, objB.b = 3
+// 期望输出：6
 console.log(follower.value)
 ```
 
